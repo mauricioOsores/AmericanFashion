@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AmericanFashionModelStoreContainer" CdmEntityContainer="AmericanFashionEntities">
+    <EntitySetMapping Name="Administrador">
+      <EntityTypeMapping TypeName="AmericanFashionModel.Administrador">
+        <MappingFragment StoreEntitySet="Administrador">
+          <ScalarProperty Name="RutA" ColumnName="RutA" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bodeguero">
+      <EntityTypeMapping TypeName="AmericanFashionModel.Bodeguero">
+        <MappingFragment StoreEntitySet="Bodeguero">
+          <ScalarProperty Name="RutB" ColumnName="RutB" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="AmericanFashionModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="CodigoP" ColumnName="CodigoP" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Glosa" ColumnName="Glosa" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="AmericanFashionModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="AmericanFashionModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="RutU" ColumnName="RutU" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendedor">
+      <EntityTypeMapping TypeName="AmericanFashionModel.Vendedor">
+        <MappingFragment StoreEntitySet="Vendedor">
+          <ScalarProperty Name="RutV" ColumnName="RutV" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Venta">
+      <EntityTypeMapping TypeName="AmericanFashionModel.Venta">
+        <MappingFragment StoreEntitySet="Venta">
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="Nombre_empresa" ColumnName="Nombre_empresa" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AmericanFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Administrador">
+    <Key>
+      <PropertyRef Name="RutA" />
+    </Key>
+    <Property Name="RutA" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Bodeguero">
+    <Key>
+      <PropertyRef Name="RutB" />
+    </Key>
+    <Property Name="RutB" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="CodigoP" />
+    </Key>
+    <Property Name="CodigoP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Glosa" Type="varchar" MaxLength="50" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Precio" Type="varchar" MaxLength="50" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="RutU" />
+    </Key>
+    <Property Name="RutU" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Clave" Type="varchar" MaxLength="50" />
+    <Property Name="Rol" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Vendedor">
+    <Key>
+      <PropertyRef Name="RutV" />
+    </Key>
+    <Property Name="RutV" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="Folio" />
+    </Key>
+    <Property Name="Folio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto" Type="int" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="Hora" Type="varchar" MaxLength="50" />
+    <Property Name="NombreEmpresa" Type="varchar" MaxLength="50" />
+    <Property Name="Total" Type="varchar" MaxLength="50" />
+    <Property Name="Vendedor" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Administrador_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RutU" />
+      </Principal>
+      <Dependent Role="Administrador">
+        <PropertyRef Name="RutA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bodeguero_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Bodeguero" Type="Self.Bodeguero" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RutU" />
+      </Principal>
+      <Dependent Role="Bodeguero">
+        <PropertyRef Name="RutB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Administrador">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="RutA" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Bodeguero">
+    <End Role="Bodeguero" Type="Self.Bodeguero" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bodeguero">
+        <PropertyRef Name="RutB" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vendedor_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RutU" />
+      </Principal>
+      <Dependent Role="Vendedor">
+        <PropertyRef Name="RutV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Administrador">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="RutA" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="CodigoP" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Vendedor">
+    <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedor">
+        <PropertyRef Name="RutV" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AmericanFModelStoreContainer">
+    <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bodeguero" EntityType="Self.Bodeguero" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Administrador_Usuario" Association="Self.FK_Administrador_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Administrador" EntitySet="Administrador" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bodeguero_Usuario" Association="Self.FK_Bodeguero_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Bodeguero" EntitySet="Bodeguero" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Administrador" Association="Self.FK_Producto_Administrador">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Bodeguero" Association="Self.FK_Producto_Bodeguero">
+      <End Role="Bodeguero" EntitySet="Bodeguero" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vendedor_Usuario" Association="Self.FK_Vendedor_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Vendedor" EntitySet="Vendedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Administrador" Association="Self.FK_Venta_Administrador">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Producto" Association="Self.FK_Venta_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Vendedor" Association="Self.FK_Venta_Vendedor">
+      <End Role="Vendedor" EntitySet="Vendedor" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

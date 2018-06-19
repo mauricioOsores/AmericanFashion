@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AmericanFashionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Administrador">
+    <Key>
+      <PropertyRef Name="RutA" />
+    </Key>
+    <Property Name="RutA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Administrador_Usuario" FromRole="Administrador" ToRole="Usuario" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Administrador" FromRole="Administrador" ToRole="Producto" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK_Venta_Administrador" FromRole="Administrador" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Bodeguero">
+    <Key>
+      <PropertyRef Name="RutB" />
+    </Key>
+    <Property Name="RutB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Bodeguero_Usuario" FromRole="Bodeguero" ToRole="Usuario" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Bodeguero" FromRole="Bodeguero" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="CodigoP" />
+    </Key>
+    <Property Name="CodigoP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Precio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Glosa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Administrador" Relationship="Self.FK_Producto_Administrador" FromRole="Producto" ToRole="Administrador" />
+    <NavigationProperty Name="Bodeguero" Relationship="Self.FK_Producto_Bodeguero" FromRole="Producto" ToRole="Bodeguero" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK_Venta_Producto" FromRole="Producto" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="RutU" />
+    </Key>
+    <Property Name="RutU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Administrador" Relationship="Self.FK_Administrador_Usuario" FromRole="Usuario" ToRole="Administrador" />
+    <NavigationProperty Name="Bodeguero" Relationship="Self.FK_Bodeguero_Usuario" FromRole="Usuario" ToRole="Bodeguero" />
+    <NavigationProperty Name="Vendedor" Relationship="Self.FK_Vendedor_Usuario" FromRole="Usuario" ToRole="Vendedor" />
+  </EntityType>
+  <EntityType Name="Vendedor">
+    <Key>
+      <PropertyRef Name="RutV" />
+    </Key>
+    <Property Name="RutV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Vendedor_Usuario" FromRole="Vendedor" ToRole="Usuario" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK_Venta_Vendedor" FromRole="Vendedor" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="Folio" />
+    </Key>
+    <Property Name="Folio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <Property Name="Hora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre_empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Total" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Vendedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Administrador" Relationship="Self.FK_Venta_Administrador" FromRole="Venta" ToRole="Administrador" />
+    <NavigationProperty Name="Producto1" Relationship="Self.FK_Venta_Producto" FromRole="Venta" ToRole="Producto" />
+    <NavigationProperty Name="Vendedor1" Relationship="Self.FK_Venta_Vendedor" FromRole="Venta" ToRole="Vendedor" />
+  </EntityType>
+  <Association Name="FK_Administrador_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RutU" />
+      </Principal>
+      <Dependent Role="Administrador">
+        <PropertyRef Name="RutA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Administrador">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="RutA" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Administrador">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="RutA" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bodeguero_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Bodeguero" Type="Self.Bodeguero" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RutU" />
+      </Principal>
+      <Dependent Role="Bodeguero">
+        <PropertyRef Name="RutB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Bodeguero">
+    <End Role="Bodeguero" Type="Self.Bodeguero" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bodeguero">
+        <PropertyRef Name="RutB" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="CodigoP" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vendedor_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RutU" />
+      </Principal>
+      <Dependent Role="Vendedor">
+        <PropertyRef Name="RutV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Vendedor">
+    <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedor">
+        <PropertyRef Name="RutV" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AmericanFashionEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrador" EntityType="Self.Administrador" />
+    <EntitySet Name="Bodeguero" EntityType="Self.Bodeguero" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="Vendedor" EntityType="Self.Vendedor" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" />
+    <AssociationSet Name="FK_Administrador_Usuario" Association="Self.FK_Administrador_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Administrador" EntitySet="Administrador" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Administrador" Association="Self.FK_Producto_Administrador">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Administrador" Association="Self.FK_Venta_Administrador">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bodeguero_Usuario" Association="Self.FK_Bodeguero_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Bodeguero" EntitySet="Bodeguero" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Bodeguero" Association="Self.FK_Producto_Bodeguero">
+      <End Role="Bodeguero" EntitySet="Bodeguero" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Producto" Association="Self.FK_Venta_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vendedor_Usuario" Association="Self.FK_Vendedor_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Vendedor" EntitySet="Vendedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Vendedor" Association="Self.FK_Venta_Vendedor">
+      <End Role="Vendedor" EntitySet="Vendedor" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
